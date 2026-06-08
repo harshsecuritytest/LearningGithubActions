@@ -1,4 +1,4 @@
-name: Load Test
+name: Load Test with wrk2
 
 on:
   workflow_dispatch:
@@ -30,4 +30,4 @@ jobs:
       - name: Run load test
         env:
           MACHINE_BASE: ${{ matrix.base }}
-        run: wrk -t2 -c400 -d600s -s load-test.lua https://cdc.acropolis.teamzemo.tech
+        run: wrk -t2 -c400 -d600s -s load-test.lua https://cdcserver.acropolis.teamzemo.tech

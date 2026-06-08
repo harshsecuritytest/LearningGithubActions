@@ -1,0 +1,33 @@
+name: Load Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  load-test:
+    strategy:
+      matrix:
+        include:
+          - machine: 1
+            base: 0
+          - machine: 2
+            base: 250000
+          - machine: 3
+            base: 500000
+          - machine: 4
+            base: 750000
+
+    runs-on: ubuntu-latest
+    name: Machine ${{ matrix.machine }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install wrk
+        run: sudo apt-get install -y wrk
+
+      - name: Run load test
+        env:
+          MACHINE_BASE: ${{ matrix.base }}
+        run: wrk -t2 -c100 -d300s -s load-test.lua https://cdc.acropolis.teamzemo.tech

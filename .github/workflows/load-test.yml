@@ -30,4 +30,4 @@ jobs:
       - name: Run load test
         env:
           MACHINE_BASE: ${{ matrix.base }}
-        run: wrk -t2 -c100 -d300s -s load-test.lua https://cdc.acropolis.teamzemo.tech
+        run: wrk -t2 -c400 -d600s -s load-test.lua https://cdc.acropolis.teamzemo.tech

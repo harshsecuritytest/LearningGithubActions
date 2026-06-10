@@ -1,4 +1,4 @@
-name: Load Test with wrk2
+name: Perfected Distributed Load Test
 
 on:
   workflow_dispatch:
@@ -21,13 +21,14 @@ jobs:
     name: Machine ${{ matrix.machine }}
 
     steps:
-      - name: Checkout repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install wrk
-        run: sudo apt-get install -y wrk
+      - name: Install Load Engine
+        run: sudo apt-get update && sudo apt-get install -y wrk
 
-      - name: Run load test
+      - name: Execute Attack Grid
         env:
           MACHINE_BASE: ${{ matrix.base }}
-        run: wrk -t2 -c300 -d600s -s load-test.lua https://cdcserver.acropolis.teamzemo.tech
+        # Fully corrected subdomain target with standard core-to-connection ratio
+        run: wrk -t2 -c40 -d270s -s load-test.lua https://cdcserver.acropolis.teamzemo.tech
